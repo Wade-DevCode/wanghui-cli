@@ -38,19 +38,39 @@ You can also add `wade.config.json` in the project root:
 Interactive REPL:
 
 ```powershell
-npm run dev -- --provider openai --model gpt-5.5
+node dist/main.js --provider openai --model gpt-5.5
 ```
 
 One-shot task:
 
 ```powershell
-npm run dev -- run "inspect the project and summarize it" --provider openai --model gpt-5.5
+node dist/main.js run "inspect the project and summarize it" --provider openai --model gpt-5.5
 ```
 
 After building, the executable bundle is:
 
 ```powershell
 node dist/main.js --help
+```
+
+## Xiaomi MiMo Token Plan
+
+This repository includes a non-secret `wade.config.json` for Xiaomi's OpenAI-compatible endpoint:
+
+```json
+{
+  "provider": "compatible",
+  "model": "mimo-v2.5-pro",
+  "baseUrl": "https://token-plan-cn.xiaomimimo.com/v1",
+  "approval": "default"
+}
+```
+
+Set the key in your current shell before running Wade's CLI:
+
+```powershell
+$env:WADE_API_KEY="..."
+node dist/main.js run "read README.md and summarize it" --approval never
 ```
 
 ## Providers
