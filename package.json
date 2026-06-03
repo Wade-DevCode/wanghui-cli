@@ -3,6 +3,19 @@
   "version": "0.1.0",
   "description": "An original multi-provider coding-agent CLI.",
   "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Wade-DevCode/wanghui-cli.git"
+  },
+  "homepage": "https://github.com/Wade-DevCode/wanghui-cli#readme",
+  "bugs": {
+    "url": "https://github.com/Wade-DevCode/wanghui-cli/issues"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "bin": {
     "wanghui": "./dist/main.js"
   },
