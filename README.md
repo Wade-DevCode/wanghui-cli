@@ -1,6 +1,6 @@
-# Wade's CLI
+# Wanghui CLI
 
-Wade's CLI is an original TypeScript/Node.js coding-agent CLI. It is a clean-room implementation inspired by public coding-agent workflows: inspect a workspace, call local tools, request approvals, edit files, run commands, and keep session logs.
+Wanghui CLI is an original TypeScript/Node.js coding-agent CLI. It is a clean-room implementation inspired by public coding-agent workflows: inspect a workspace, call local tools, request approvals, edit files, run commands, and keep session logs.
 
 ## Setup
 
@@ -23,7 +23,7 @@ $env:WADE_API_KEY="..."       # for --provider compatible
 $env:WADE_BASE_URL="..."      # for --provider compatible
 ```
 
-You can also add `wade.config.json` in the project root:
+You can also add `wanghui.config.json` in the project root:
 
 ```json
 {
@@ -38,24 +38,24 @@ You can also add `wade.config.json` in the project root:
 Interactive REPL:
 
 ```powershell
-node dist/main.js --provider openai --model gpt-5.5
+wanghui --provider openai --model gpt-5.5
 ```
 
 One-shot task:
 
 ```powershell
-node dist/main.js run "inspect the project and summarize it" --provider openai --model gpt-5.5
+wanghui run "inspect the project and summarize it" --provider openai --model gpt-5.5
 ```
 
 After building, the executable bundle is:
 
 ```powershell
-node dist/main.js --help
+wanghui --help
 ```
 
 ## Xiaomi MiMo Token Plan
 
-This repository includes a non-secret `wade.config.json` for Xiaomi's OpenAI-compatible endpoint:
+This repository includes a non-secret `wanghui.config.json` for Xiaomi's OpenAI-compatible endpoint:
 
 ```json
 {
@@ -66,11 +66,11 @@ This repository includes a non-secret `wade.config.json` for Xiaomi's OpenAI-com
 }
 ```
 
-Set the key in your current shell before running Wade's CLI:
+Set the key in your current shell before running Wanghui CLI:
 
 ```powershell
 $env:WADE_API_KEY="..."
-node dist/main.js run "read README.md and summarize it" --approval never
+wanghui run "read README.md and summarize it" --approval never
 ```
 
 ## Providers
@@ -106,12 +106,12 @@ Automation options:
 - `--yes` auto-approves ordinary writes and shell commands.
 - `--approval never` auto-approves ordinary actions but blocks high-risk commands.
 
-Session logs are written under `.wade/sessions` and are ignored by git.
+Session logs are written under `.wanghui/sessions` and are ignored by git.
 
 ## Verification
 
 ```powershell
 npm test
 npm run build
-node dist/main.js --help
+wanghui --help
 ```

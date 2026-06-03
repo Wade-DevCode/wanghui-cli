@@ -1,5 +1,6 @@
 node_modules/
 dist/
+.wanghui/
 .wade/
 .env
 .env.*

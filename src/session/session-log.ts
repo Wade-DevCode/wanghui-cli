@@ -14,7 +14,7 @@ export function createNoopSessionLogger(): SessionLogger {
 }
 
 export function createSessionLogger(workspace: string, id = new Date().toISOString().replace(/[:.]/g, "-")): SessionLogger {
-  const logPath = path.join(workspace, ".wade", "sessions", `${id}.jsonl`);
+  const logPath = path.join(workspace, ".wanghui", "sessions", `${id}.jsonl`);
 
   return {
     async log(event, data) {

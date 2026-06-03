@@ -9,11 +9,11 @@ import { confirmTool } from "./main.js";
 
 export async function startRepl(config: WadeConfig, provider: ModelProvider): Promise<void> {
   const rl = readline.createInterface({ input, output });
-  output.write(`Wade's CLI (${config.provider}/${config.model})\nWorkspace: ${config.cwd}\nType /exit to quit.\n\n`);
+  output.write(`Wanghui CLI (${config.provider}/${config.model})\nWorkspace: ${config.cwd}\nType /exit to quit.\n\n`);
 
   try {
     while (true) {
-      const task = (await rl.question("wade> ")).trim();
+      const task = (await rl.question("wanghui> ")).trim();
       if (!task) {
         continue;
       }

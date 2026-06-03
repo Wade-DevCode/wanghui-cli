@@ -62,11 +62,11 @@ export function parseArgs(argv: string[]): ParsedArgs {
 }
 
 export function helpText(): string {
-  return `Wade's CLI
+  return `Wanghui CLI
 
 Usage:
-  wade [options]
-  wade run "<task>" [options]
+  wanghui [options]
+  wanghui run "<task>" [options]
 
 Options:
   --provider openai|anthropic|openrouter|compatible

@@ -37,4 +37,27 @@ describe("runAgent", () => {
     expect(result.status).toBe("completed");
     expect(result.finalMessage).toBe("Wrote done.txt");
   });
+
+  it("uses the Wanghui CLI system identity", async () => {
+    const workspace = await mkdtemp(path.join(tmpdir(), "wanghui-agent-"));
+    let firstSystemMessage = "";
+    const provider: ModelProvider = {
+      name: "fake",
+      async send(input) {
+        firstSystemMessage = input.messages[0]?.content ?? "";
+        return { content: "ok", toolCalls: [], raw: {} };
+      },
+    };
+
+    await runAgent({
+      task: "say ok",
+      provider,
+      registry: createToolRegistry({ workspace }),
+      approvalMode: "never",
+      workspace,
+      maxTurns: 1,
+    });
+
+    expect(firstSystemMessage).toContain("Wanghui CLI");
+  });
 });

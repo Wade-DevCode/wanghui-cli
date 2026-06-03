@@ -1,4 +1,7 @@
 import { describe, expect, it } from "vitest";
+import { mkdtemp, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import path from "node:path";
 import { resolveConfig } from "../src/config/config.js";
 
 describe("resolveConfig", () => {
@@ -46,5 +49,27 @@ describe("resolveConfig", () => {
         cwd: "/repo",
       }),
     ).toThrow("ANTHROPIC_API_KEY");
+  });
+
+  it("loads wanghui.config.json from the project root", async () => {
+    const cwd = await mkdtemp(path.join(tmpdir(), "wanghui-config-"));
+    await writeFile(
+      path.join(cwd, "wanghui.config.json"),
+      JSON.stringify({
+        provider: "compatible",
+        model: "mimo-v2.5-pro",
+        baseUrl: "https://token-plan-cn.xiaomimimo.com/v1",
+      }),
+      "utf8",
+    );
+
+    const config = resolveConfig({
+      argv: ["run", "hello"],
+      env: { WADE_API_KEY: "key" },
+      cwd,
+    });
+
+    expect(config.provider).toBe("compatible");
+    expect(config.model).toBe("mimo-v2.5-pro");
   });
 });

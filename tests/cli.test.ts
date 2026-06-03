@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { parseArgs } from "../src/cli/args.js";
+import { helpText, parseArgs } from "../src/cli/args.js";
 
 describe("parseArgs", () => {
   it("parses run mode", () => {
@@ -13,5 +13,10 @@ describe("parseArgs", () => {
 
   it("defaults to repl mode", () => {
     expect(parseArgs([]).command).toBe("repl");
+  });
+
+  it("prints Wanghui CLI usage", () => {
+    expect(helpText()).toContain("Wanghui CLI");
+    expect(helpText()).toContain("wanghui run \"<task>\"");
   });
 });

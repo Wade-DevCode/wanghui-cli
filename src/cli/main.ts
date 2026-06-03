@@ -29,7 +29,7 @@ export async function main(argv = process.argv.slice(2), env = process.env, cwd 
     }
 
     if (!config.task) {
-      throw new Error('Missing task. Use: wade run "<task>"');
+      throw new Error('Missing task. Use: wanghui run "<task>"');
     }
 
     const result = await runAgent({

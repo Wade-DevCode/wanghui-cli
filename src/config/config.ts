@@ -60,7 +60,7 @@ export function resolveConfig(input: ResolveConfigInput): WadeConfig {
   const cwd = parsed.cwd ? path.resolve(parsed.cwd) : input.cwd;
   const model = parsed.model ?? file.model ?? DEFAULT_MODELS[provider];
   if (!model) {
-    throw new Error(`Missing model for provider '${provider}'. Pass --model or set model in wade.config.json.`);
+    throw new Error(`Missing model for provider '${provider}'. Pass --model or set model in wanghui.config.json.`);
   }
 
   const baseUrl = parsed.baseUrl ?? file.baseUrl ?? providerBaseUrl(provider, input.env);
@@ -170,8 +170,8 @@ function requireValue(args: string[], index: number, flag: string): string {
 }
 
 function readConfigFile(cwd: string): ConfigFile {
-  const configPath = path.join(cwd, "wade.config.json");
-  if (!fs.existsSync(configPath)) {
+  const configPath = findConfigPath(cwd);
+  if (!configPath) {
     return {};
   }
 
@@ -180,9 +180,23 @@ function readConfigFile(cwd: string): ConfigFile {
     assertProvider(parsed.provider);
   }
   if (parsed.approval && !isApprovalMode(parsed.approval)) {
-    throw new Error(`Invalid approval mode '${parsed.approval}' in wade.config.json.`);
+    throw new Error(`Invalid approval mode '${parsed.approval}' in ${path.basename(configPath)}.`);
   }
   return parsed;
+}
+
+function findConfigPath(cwd: string): string | undefined {
+  const currentName = path.join(cwd, "wanghui.config.json");
+  if (fs.existsSync(currentName)) {
+    return currentName;
+  }
+
+  const legacyName = path.join(cwd, "wade.config.json");
+  if (fs.existsSync(legacyName)) {
+    return legacyName;
+  }
+
+  return undefined;
 }
 
 function assertProvider(provider: string): asserts provider is ProviderName {
