@@ -1,0 +1,25 @@
+{
+  "name": "wades-cli",
+  "version": "0.1.0",
+  "description": "An original multi-provider coding-agent CLI.",
+  "type": "module",
+  "bin": {
+    "wade": "./dist/cli/main.js"
+  },
+  "scripts": {
+    "build": "tsup src/cli/main.ts --format esm --dts --clean",
+    "dev": "tsx src/cli/main.ts",
+    "test": "vitest run"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^22.15.29",
+    "tsup": "^8.5.0",
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.2"
+  }
+}
