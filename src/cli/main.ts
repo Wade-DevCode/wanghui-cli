@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import readline from "node:readline/promises";
+import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { stdin as input, stdout as output, stderr } from "node:process";
@@ -60,7 +61,23 @@ export async function confirmTool(toolName: string, toolInput: Record<string, un
   }
 }
 
-if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+export function isDirectEntrypoint(scriptPath: string | undefined, moduleUrl: string): boolean {
+  if (!scriptPath) {
+    return false;
+  }
+  return realPath(scriptPath) === realPath(fileURLToPath(moduleUrl));
+}
+
+function realPath(filePath: string): string {
+  const resolved = path.resolve(filePath);
+  try {
+    return fs.realpathSync.native(resolved);
+  } catch {
+    return resolved;
+  }
+}
+
+if (isDirectEntrypoint(process.argv[1], import.meta.url)) {
   main().then((code) => {
     process.exitCode = code;
   });
