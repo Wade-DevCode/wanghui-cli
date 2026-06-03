@@ -17,6 +17,16 @@ describe("resolveConfig", () => {
     expect(config.cwd).toBe("/repo");
   });
 
+  it("defaults OpenAI to GPT-5.5 when no model flag is provided", () => {
+    const config = resolveConfig({
+      argv: ["run", "fix tests", "--provider", "openai"],
+      env: { OPENAI_API_KEY: "openai-key" },
+      cwd: "/repo",
+    });
+
+    expect(config.model).toBe("gpt-5.5");
+  });
+
   it("uses OpenRouter key and base URL for openrouter provider", () => {
     const config = resolveConfig({
       argv: ["run", "inspect", "--provider", "openrouter", "--model", "anthropic/claude-sonnet-4.6"],

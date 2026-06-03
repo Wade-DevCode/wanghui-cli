@@ -31,9 +31,9 @@ interface ConfigFile {
 
 const DEFAULT_PROVIDER: ProviderName = "openai";
 const DEFAULT_MODELS: Record<ProviderName, string> = {
-  openai: "gpt-5.2",
+  openai: "gpt-5.5",
   anthropic: "claude-sonnet-4-6",
-  openrouter: "openai/gpt-5.2",
+  openrouter: "openai/gpt-5.5",
   compatible: "",
 };
 

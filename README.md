@@ -28,7 +28,7 @@ You can also add `wade.config.json` in the project root:
 ```json
 {
   "provider": "openai",
-  "model": "gpt-5.2",
+  "model": "gpt-5.5",
   "approval": "default"
 }
 ```
@@ -38,13 +38,13 @@ You can also add `wade.config.json` in the project root:
 Interactive REPL:
 
 ```powershell
-npm run dev -- --provider openai --model gpt-5.2
+npm run dev -- --provider openai --model gpt-5.5
 ```
 
 One-shot task:
 
 ```powershell
-npm run dev -- run "inspect the project and summarize it" --provider openai --model gpt-5.2
+npm run dev -- run "inspect the project and summarize it" --provider openai --model gpt-5.5
 ```
 
 After building, the executable bundle is:
@@ -95,4 +95,3 @@ npm test
 npm run build
 node dist/main.js --help
 ```
-
